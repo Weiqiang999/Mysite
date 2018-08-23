@@ -26,8 +26,9 @@ def update_comment(request):
         # 返回数据
         data['status'] = 'SUCCESS'
         data['username'] = comment.user.username
-        data['comment_time'] = comment.comment_time.strftime('%Y-%m-%d %H:%M:%S')
+        data['comment_time'] = comment.comment_time.timestamp()
         data['text'] = comment.text
+        data['content_type'] = ContentType.objects.get_for_model(comment).model
         if not parent is None:
             data['reply_to'] = comment.reply_to.username
         else:

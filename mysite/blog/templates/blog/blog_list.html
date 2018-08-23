@@ -6,6 +6,11 @@
 {% endblock %}
 
 {% load staticfiles %}
+
+{% load comment_tags %}
+
+{% load likes_tags %}
+
 {% block header_extends %}
 	<link rel="stylesheet" href="{% static 'blog/css/blog.css' %}">
 {% endblock %}
@@ -38,7 +43,9 @@
 									</a>
 									<span class="glyphicon glyphicon-time"></span>
 									<span class="label-link">{{ blog.created_time|date:"Y-m-d" }}</span>
-									阅读({{ blog.get_read_num }}){# 这里通过调用Blog类的get_read_num方法 #}
+									<span class="label-link">阅读({{ blog.get_read_num }})</span>{# 这里通过调用Blog类的get_read_num方法 #}
+									<span class="label-link">评论({% get_comment_count blog %})</span>
+									<span class="label-link">点赞({% get_like_count blog %})</span>
 								</p>
 								<p>{{ blog.content|striptags|truncatechars:120 }}</p>
 							</div>
